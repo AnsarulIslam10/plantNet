@@ -98,6 +98,12 @@ async function run() {
       }
     });
 
+    // save plant data in database
+    app.post('/plants', verifyToken, async (req, res)=>{
+      const plant = req.body;
+      const result = await plantsCollection.insertOne(plant)
+      res.send(result)
+    })
  
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
